@@ -120,3 +120,11 @@ flowchart LR
 ```
 
 ثلاثة مخططات SVG مستقلة: [المعمارية](docs/diagrams/architecture.svg)، [المراجعة](docs/diagrams/approval.svg)، [أثر السياق](docs/diagrams/context.svg). جميع الحقوق محفوظة وفق [بيان الحقوق](RIGHTS.md). المستودع لا يتضمن بيانات الاتصال بالمشارك أو وثائق المشاركة الخاصة.
+
+## صور النسخة المنفذة والتحقق النهائي
+
+![واجهة الموقع](docs/screenshots/final-desktop.png)
+
+![واجهة الجوال](docs/screenshots/final-mobile.png)
+
+تحقق المنسق من 19 اختبارًا ناجحًا دون احتساب نسخ dist، ومن رحلة المتصفح والتصدير والعرض بعرض 390px دون أخطاء JavaScript أو تجاوز أفقي. الأدلة في `docs/coordinator-final-tests.txt` و`docs/coordinator-browser-qa.json`. حالات التجربة مؤلفة ولا تمثل أثرًا اجتماعيًا مقاسًا.

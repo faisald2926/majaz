@@ -1,0 +1,15 @@
+{
+  "id": "majaz",
+  "url": "http://127.0.0.1:4312",
+  "steps": [
+    {
+      "step": "approved-only child projection and visibility restoration"
+    },
+    {
+      "step": "revoked card disappears from live child view"
+    }
+  ],
+  "rtl": true,
+  "mobileNoOverflow": true,
+  "pageErrors": []
+}
