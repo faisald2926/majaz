@@ -42,7 +42,7 @@ export class Library{
     Object.assign(doc,{...valid,cards:next,...(contextChanged?{previousContext}:{})});this.refresh();return clone(doc);
   }
   approve(id,version){const {doc,card}=this.locate(id);if(version!==card.version)fail(409,'تغيرت النسخة؛ راجع البطاقة مرة أخرى.');card.approval=fingerprint(this.state,doc,card);this.changed();return this.parent();}
-  revoke(id){const {card}=this.locate(id);card.approval=null;this.changed();return this.parent();}
+  revoke(id){const {card}=this.locate(id);card.approval=null;card.version=randomUUID();this.changed();return this.parent();}
   remove(id){if(!this.state.documents.some(d=>d.id===id))fail(404,'المصدر غير موجود.');this.state.documents=this.state.documents.filter(d=>d.id!==id);this.changed();}
   allowed(){return this.state.documents.flatMap(doc=>doc.cards.filter(c=>approved(this.state,doc,c)).map(c=>({id:c.id,version:c.version,title:c.title,text:c.text})));}
   search(query=''){if(typeof query!=='string'||query.length>200)fail(400,'البحث لا يتجاوز 200 حرف.');return search(this.allowed(),query);}
@@ -50,7 +50,7 @@ export class Library{
   read(id,version){const {doc,card}=this.locate(id);if(!approved(this.state,doc,card)||(version&&version!==card.version))fail(409,'البطاقة تحتاج موافقة حديثة من ولي الأمر.');return {id:card.id,version:card.version,title:card.title,text:card.text};}
   save(id,version){this.read(id,version);if(!this.state.saved.includes(id))this.state.saved.push(id);this.changed();return {saved:true};}
   saved(){const ids=new Set(this.state.saved);return {cards:this.allowed().filter(c=>ids.has(c.id))};}
-  request(topic,consent){if(consent!==true)fail(400,'أكّد إرسال طلب الموضوع إلى ولي الأمر.');if(this.state.requests.length>=100)fail(429,'قائمة الطلبات ممتلئة؛ راجع ولي الأمر.');this.state.requests.push({id:randomUUID(),topic:text(topic,160,'الموضوع'),status:'pending',createdAt:new Date().toISOString()});this.changed();return {status:'requested'};}
+  request(topic,consent){if(consent!==true)fail(400,'أكّد إرسال طلب الموضوع إلى ولي الأمر.');const validTopic=text(topic,160,'الموضوع');if(this.state.requests.filter(r=>r.status==='pending').length>=100)fail(429,'قائمة الطلبات المعلقة ممتلئة؛ راجع ولي الأمر.');while(this.state.requests.length>=100){const reviewed=this.state.requests.findIndex(r=>r.status==='reviewed');if(reviewed<0)fail(429,'قائمة الطلبات المعلقة ممتلئة؛ راجع ولي الأمر.');this.state.requests.splice(reviewed,1);}this.state.requests.push({id:randomUUID(),topic:validTopic,status:'pending',createdAt:new Date().toISOString()});this.changed();return {status:'requested'};}
   resolve(id){const request=this.state.requests.find(r=>r.id===id);if(!request)fail(404,'الطلب غير موجود.');request.status='reviewed';this.changed();return this.parent();}
   parent(){return {...this.snapshot(),documents:this.state.documents.map(d=>({...clone(d),cards:d.cards.map(c=>{const {approval,fingerprint:hash,...safe}=clone(c);return {...safe,status:approved(this.state,d,c)?'approved':'pending'};})})),pending:this.state.documents.reduce((n,d)=>n+d.cards.filter(c=>!approved(this.state,d,c)).length,0)};}
   exportParent(){return {format:'majaz-1',childAge:this.state.childAge,policyVersion:this.state.policyVersion,documents:this.state.documents.map(d=>({sourceTitle:d.sourceTitle,mode:d.mode,independentDeclared:d.independentDeclared,cards:d.cards.map(c=>({title:c.title,text:c.text}))}))};}

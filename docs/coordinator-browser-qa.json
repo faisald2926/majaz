@@ -1,6 +1,8 @@
 {
   "id": "majaz",
-  "url": "http://127.0.0.1:4312",
+  "url": "http://127.0.0.1:55327",
+  "isolated": true,
+  "status": "pass",
   "steps": [
     {
       "step": "approved-only child projection and visibility restoration"
@@ -11,5 +13,12 @@
   ],
   "rtl": true,
   "mobileNoOverflow": true,
-  "pageErrors": []
+  "pageErrors": [],
+  "screenshots": {
+    "desktop": "majaz-desktop.png",
+    "desktopFull": "majaz-desktop-full.png",
+    "mobile": "majaz-mobile.png",
+    "visibleCredentials": false,
+    "visibleErrors": false
+  }
 }

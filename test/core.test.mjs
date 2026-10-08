@@ -39,3 +39,25 @@ test('stale approval is rejected and independent mode requires declaration',()=>
   const {lib,doc}=fixture();assert.throws(()=>lib.approve(doc.cards[0].id,'old'),e=>e.status===409);
   assert.throws(()=>lib.create({sourceTitle:'مصدر',mode:'independent',cards:[{title:'أ',text:'ب'}]}),e=>e.status===400);
 });
+
+test('revocation rejects a prior review while a fresh review can approve',()=>{
+  const {lib,doc}=fixture('independent');const card=doc.cards[0],sibling=doc.cards[1];
+  lib.approve(card.id,card.version);lib.revoke(card.id);
+  assert.throws(()=>lib.approve(card.id,card.version),e=>e.status===409);
+  assert.deepEqual(lib.exportChild(),{cards:[]});
+  const current=lib.parent().documents[0].cards;
+  assert.notEqual(current[0].version,card.version);assert.equal(current[1].version,sibling.version);
+  lib.approve(card.id,current[0].version);assert.deepEqual(lib.search('').cards.map(c=>c.title),[card.title]);
+});
+
+test('reviewed topic requests release queue capacity without unbounded retained history',()=>{
+  const lib=new Library();for(let i=0;i<100;i++)lib.request('موضوع '+i,true);
+  assert.throws(()=>lib.request('معلق زائد',true),e=>e.status===429);
+  lib.resolve(lib.parent().requests[0].id);lib.request('مكان تحرر بعد المراجعة',true);
+  assert.equal(lib.parent().requests.filter(r=>r.status==='pending').length,100);
+  assert.ok(lib.parent().requests.length<=100);
+  for(const r of lib.parent().requests)lib.resolve(r.id);
+  lib.request('طلب بعد إتمام المراجعات',true);
+  assert.equal(lib.parent().requests.filter(r=>r.status==='pending').length,1);
+  assert.ok(lib.parent().requests.length<=100);
+});
