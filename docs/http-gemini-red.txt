@@ -1,0 +1,136 @@
+✖ optional adapter requires explicit sending consent and configured key (1.2126ms)
+✖ Gemini HTTP mock yields validated pending draft, never approval (1.3686ms)
+✖ adapter handles schema violation, safety rejection, outage and timeout (0.9005ms)
+✖ child and forged tokens cannot read, edit or approve parent data (28.8378ms)
+✖ HTTP child serialization never exposes pending source, query matches or parent secrets (6.2519ms)
+✖ HTTP rejects stale approvals, cross-origin writes and wrong content types (3.6663ms)
+✖ XSS remains plain data and revoked cards disappear from saved, read and export (3.7856ms)
+✖ topic request needs consent and remains request-only (3.4132ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 169.4963
+
+✖ failing tests:
+
+test at test\gemini.test.mjs:4:1
+✖ optional adapter requires explicit sending consent and configured key (1.2126ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/gemini.test.mjs:4:88)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test\gemini.test.mjs:5:1
+✖ Gemini HTTP mock yields validated pending draft, never approval (1.3686ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   cards: []
+  -   cards: [
+  -     {
+  -       text: 'تحتاج النباتات الضوء.',
+  -       title: 'النبات'
+  -     }
+  -   ],
+  -   status: 'draft'
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/gemini.test.mjs:5:263)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cards: [] },
+    expected: { cards: [ [Object] ], status: 'draft' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\gemini.test.mjs:6:1
+✖ adapter handles schema violation, safety rejection, outage and timeout (0.9005ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/gemini.test.mjs:6:350)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test\http.test.mjs:3:1
+✖ child and forged tokens cannot read, edit or approve parent data (28.8378ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53259
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53259
+    }
+  }
+
+test at test\http.test.mjs:4:1
+✖ HTTP child serialization never exposes pending source, query matches or parent secrets (6.2519ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53261
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53261
+    }
+  }
+
+test at test\http.test.mjs:5:1
+✖ HTTP rejects stale approvals, cross-origin writes and wrong content types (3.6663ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53263
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53263
+    }
+  }
+
+test at test\http.test.mjs:6:1
+✖ XSS remains plain data and revoked cards disappear from saved, read and export (3.7856ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53265
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53265
+    }
+  }
+
+test at test\http.test.mjs:7:1
+✖ topic request needs consent and remains request-only (3.4132ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53267
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53267
+    }
+  }

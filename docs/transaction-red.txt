@@ -1,0 +1,40 @@
+✖ failed persistence publishes neither approval nor rotated child credential (76.6567ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 197.9685
+
+✖ failing tests:
+
+test at test\transaction.test.mjs:2:1
+✖ failed persistence publishes neither approval nor rotated child credential (76.6567ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   cards: [
+  +     {
+  +       id: '0d14973b-6db8-42de-854b-0865490fbbe3',
+  +       text: 'ضوء',
+  +       title: 'شمس',
+  +       version: '4f32841f-c419-4b19-8aa5-407ab45e4a66'
+  +     }
+  +   ]
+  -   cards: []
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/transaction.test.mjs:11:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cards: [ [Object] ] },
+    expected: { cards: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

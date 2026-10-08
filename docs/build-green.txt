@@ -1,0 +1,5 @@
+
+> majaz@1.0.0 build
+> node scripts/build.mjs
+
+Build verified: 15 production files; JavaScript syntax checked; no runtime dependencies. Output: dist/

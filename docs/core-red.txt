@@ -1,0 +1,207 @@
+✖ child search and export serialize approved cards only, with no private fields or global counts (3.4344ms)
+✖ correlated edits invalidate all sibling approvals and stale reads return 409 (1.5112ms)
+✖ independent declared cards retain unchanged sibling approval, source context change invalidates all (0.6204ms)
+✖ age, policy and correlated order changes require new review (0.5383ms)
+✖ import never trusts approval, tokens or role from supplied JSON (0.3376ms)
+✖ stale approval is rejected and independent mode requires declaration (0.5731ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.6466
+
+✖ failing tests:
+
+test at test\core.test.mjs:11:1
+✖ child search and export serialize approved cards only, with no private fields or global counts (3.4344ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   cards: [
+  +     {
+  +       cards: [
+  +         {
+  +           text: 'تمد الشمس النباتات بالضوء.',
+  +           title: 'الشمس'
+  +         },
+  +         {
+  +           text: 'عبارة الكنـز الخاصة غير المعتمدة',
+  +           title: 'خاص سري'
+  +         }
+  +       ],
+  +       id: '0',
+  +       independentDeclared: false,
+  +       mode: 'correlated',
+  +       sourceTitle: 'علوم مؤلفة'
+  +     }
+  +   ]
+  -   cards: []
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:13:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cards: [ [Object] ] },
+    expected: { cards: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:18:1
+✖ correlated edits invalidate all sibling approvals and stale reads return 409 (1.5112ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   cards: [
+  +     {
+  +       cards: [
+  +         {
+  +           text: 'تمد الشمس النباتات بالضوء.',
+  +           title: 'الشمس'
+  +         },
+  +         {
+  +           text: 'عبارة الكنـز الخاصة غير المعتمدة',
+  +           title: 'خاص سري'
+  +         }
+  +       ],
+  +       id: '0',
+  +       independentDeclared: false,
+  +       mode: 'correlated',
+  +       sourceTitle: 'علوم مؤلفة'
+  +     }
+  +   ]
+  -   cards: []
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:21:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cards: [ [Object] ] },
+    expected: { cards: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:23:1
+✖ independent declared cards retain unchanged sibling approval, source context change invalidates all (0.6204ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+  +   undefined
+  -   'خاص سري'
+    ]
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:26:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ undefined ],
+    expected: [ 'خاص سري' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:29:1
+✖ age, policy and correlated order changes require new review (0.5383ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   cards: [
+  +     {
+  +       cards: [
+  +         {
+  +           text: 'تمد الشمس النباتات بالضوء.',
+  +           title: 'الشمس'
+  +         },
+  +         {
+  +           text: 'عبارة الكنـز الخاصة غير المعتمدة',
+  +           title: 'خاص سري'
+  +         }
+  +       ],
+  +       id: '0',
+  +       independentDeclared: false,
+  +       mode: 'correlated',
+  +       sourceTitle: 'علوم مؤلفة'
+  +     }
+  +   ]
+  -   cards: []
+    }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:30:163)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { cards: [ [Object] ] },
+    expected: { cards: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:33:1
+✖ import never trusts approval, tokens or role from supplied JSON (0.3376ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - {
+  -   cards: []
+  - }
+  
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:36:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: { cards: [] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test\core.test.mjs:38:1
+✖ stale approval is rejected and independent mode requires declaration (0.5731ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/core.test.mjs:39:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

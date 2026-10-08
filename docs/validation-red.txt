@@ -1,0 +1,53 @@
+✖ malformed cards and over-limit documents reject cleanly without changing library (1.4652ms)
+✖ source context edits retain previous context for the human reviewer (1.2469ms)
+✔ no-op settings and independent reordering preserve current approvals (1.4549ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.171
+
+✖ failing tests:
+
+test at test\validation.test.mjs:2:1
+✖ malformed cards and over-limit documents reject cleanly without changing library (1.4652ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  TypeError: Cannot read properties of null (reading 'sourceTitle')
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/validation.test.mjs:2:319)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: Cannot read properties of null (reading 'sourceTitle')
+        at validateDoc (file:///C:/shamela/work/norah_final/projects/majaz/src/corpus.mjs:8:32)
+        at Library.create (file:///C:/shamela/work/norah_final/projects/majaz/src/corpus.mjs:28:17)
+        at file:///C:/shamela/work/norah_final/projects/majaz/test/validation.test.mjs:2:334
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/validation.test.mjs:2:319)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.start (node:internal/test_runner/test:1242:17)
+        at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test\validation.test.mjs:3:1
+✖ source context edits retain previous context for the human reviewer (1.2469ms)
+  TypeError: Cannot read properties of undefined (reading 'sourceTitle')
+      at TestContext.<anonymous> (file:///C:/shamela/work/norah_final/projects/majaz/test/validation.test.mjs:3:267)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

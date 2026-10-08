@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-08T01:28:32.977Z",
+  "browser": "Chromium (bundled Playwright)",
+  "liveGemini": false,
+  "checks": [
+    "All four authored demo cards start pending.",
+    "Parent reviewed title, text and consent, then approved one card.",
+    "Child sees exactly the one approved card and no pending titles.",
+    "Simulated visibility lifecycle recovers the library with unchanged revision through the real browser event handler and API.",
+    "Child read and saved an approved card.",
+    "An open child reader removed a revoked card through polling.",
+    "Child topic request reaches parent without generating a child answer.",
+    "Editing an approved title invalidates it and the review dialog shows previous/current text.",
+    "Parent and child layouts fit a 390px viewport without horizontal page overflow.",
+    "No browser page errors."
+  ],
+  "errors": []
+}
