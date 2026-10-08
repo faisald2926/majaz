@@ -1,1 +1,20 @@
-{"name":"majaz","version":"1.0.0","private":true,"license":"UNLICENSED","type":"module","engines":{"node":">=22"},"scripts":{"start":"node server.mjs","test":"node --test test/*.test.mjs","build":"node scripts/build.mjs","verify":"node --test test/*.test.mjs && node scripts/build.mjs"}}
+{
+  "name": "majaz",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "verify": "node --test test/*.test.mjs && node scripts/build.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faisald2926/majaz.git"
+  }
+}
