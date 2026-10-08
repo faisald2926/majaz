@@ -2,4 +2,4 @@
 > majaz@1.0.0 build
 > node scripts/build.mjs
 
-Build verified: 15 production files; JavaScript syntax checked; no runtime dependencies. Output: dist/
+Build verified: 44 distributable files including source, tests and docs; JavaScript syntax checked; no runtime dependencies. Output: dist/

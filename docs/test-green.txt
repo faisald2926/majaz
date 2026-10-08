@@ -2,29 +2,30 @@
 > majaz@1.0.0 test
 > node --test test/*.test.mjs
 
-✔ child search and export serialize approved cards only, with no private fields or global counts (4.762ms)
-✔ correlated edits invalidate all sibling approvals and stale reads return 409 (2.6468ms)
-✔ independent declared cards retain unchanged sibling approval, source context change invalidates all (1.369ms)
-✔ age, policy and correlated order changes require new review (1.1356ms)
-✔ import never trusts approval, tokens or role from supplied JSON (0.522ms)
-✔ stale approval is rejected and independent mode requires declaration (0.2909ms)
-✔ optional adapter requires explicit sending consent and configured key (1.7263ms)
-✔ Gemini HTTP mock yields validated pending draft, never approval (29.4275ms)
-✔ adapter handles schema violation, safety rejection, outage and timeout (2.3707ms)
-✔ child and forged tokens cannot read, edit or approve parent data (119.4863ms)
-✔ HTTP child serialization never exposes pending source, query matches or parent secrets (89.9945ms)
-✔ HTTP rejects stale approvals, cross-origin writes and wrong content types (44.4225ms)
-✔ XSS remains plain data and revoked cards disappear from saved, read and export (92.4424ms)
-✔ topic request needs consent and remains request-only (31.3811ms)
-✔ failed persistence publishes neither approval nor rotated child credential (101.0552ms)
-✔ malformed cards and over-limit documents reject cleanly without changing library (2.3674ms)
-✔ source context edits retain previous context for the human reviewer (1.591ms)
-✔ no-op settings and independent reordering preserve current approvals (4.2814ms)
-ℹ tests 18
+✔ child search and export serialize approved cards only, with no private fields or global counts (4.2062ms)
+✔ correlated edits invalidate all sibling approvals and stale reads return 409 (1.8139ms)
+✔ independent declared cards retain unchanged sibling approval, source context change invalidates all (1.2689ms)
+✔ age, policy and correlated order changes require new review (1.9749ms)
+✔ import never trusts approval, tokens or role from supplied JSON (1.3543ms)
+✔ stale approval is rejected and independent mode requires declaration (0.3353ms)
+✔ optional adapter requires explicit sending consent and configured key (3.0434ms)
+✔ Gemini HTTP mock yields validated pending draft, never approval (31.287ms)
+✔ adapter handles schema violation, safety rejection, outage and timeout (1.5882ms)
+✔ child and forged tokens cannot read, edit or approve parent data (143.2506ms)
+✔ HTTP child serialization never exposes pending source, query matches or parent secrets (91.2567ms)
+✔ HTTP rejects stale approvals, cross-origin writes and wrong content types (31.3956ms)
+✔ XSS remains plain data and revoked cards disappear from saved, read and export (75.6121ms)
+✔ topic request needs consent and remains request-only (16.2505ms)
+✔ parent rotation invalidates the old child token and grants no parent capability (46.8869ms)
+✔ failed persistence publishes neither approval nor rotated child credential (111.4607ms)
+✔ malformed cards and over-limit documents reject cleanly without changing library (2.1646ms)
+✔ source context edits retain previous context for the human reviewer (1.985ms)
+✔ no-op settings and independent reordering preserve current approvals (2.5724ms)
+ℹ tests 19
 ℹ suites 0
-ℹ pass 18
+ℹ pass 19
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 523.8058
+ℹ duration_ms 564.3916
