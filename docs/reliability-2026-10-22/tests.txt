@@ -1,0 +1,30 @@
+✔ child search and export serialize approved cards only, with no private fields or global counts (5.875ms)
+✔ correlated edits invalidate all sibling approvals and stale reads return 409 (2.7726ms)
+✔ independent declared cards retain unchanged sibling approval, source context change invalidates all (1.0675ms)
+✔ age, policy and correlated order changes require new review (1.5131ms)
+✔ import never trusts approval, tokens or role from supplied JSON (0.7123ms)
+✔ stale approval is rejected and independent mode requires declaration (0.3342ms)
+✔ revocation rejects a prior review while a fresh review can approve (0.8119ms)
+✔ reviewed topic requests release queue capacity without unbounded retained history (24.9104ms)
+✔ optional adapter requires explicit sending consent and configured key (1.8049ms)
+✔ historical adapter fixture with injected fetch yields validated pending draft, never approval (36.3026ms)
+✔ adapter handles schema violation, safety rejection, outage and timeout (2.5244ms)
+✔ child and forged tokens cannot read, edit or approve parent data (144.1828ms)
+✔ HTTP child serialization never exposes pending source, query matches or parent secrets (92.1637ms)
+✔ HTTP rejects stale approvals, cross-origin writes and wrong content types (46.7597ms)
+✔ XSS remains plain data and revoked cards disappear from saved, read and export (77.8948ms)
+✔ topic request needs consent and remains request-only (14.2836ms)
+✔ parent rotation invalidates the old child token and grants no parent capability (30.506ms)
+✔ child-facing prototype cannot activate live Gemini through environment variables (92.6193ms)
+✔ failed persistence publishes neither approval nor rotated child credential (116.9072ms)
+✔ malformed cards and over-limit documents reject cleanly without changing library (2.5676ms)
+✔ source context edits retain previous context for the human reviewer (2.1713ms)
+✔ no-op settings and independent reordering preserve current approvals (4.1243ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 592.6145

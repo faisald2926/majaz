@@ -1,0 +1,1 @@
+Build verified: 56 distributable files including source, tests and docs; JavaScript syntax checked; no runtime dependencies. Output: dist/

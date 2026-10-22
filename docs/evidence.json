@@ -57,7 +57,10 @@
     "source": "https://ai.google.dev/gemini-api/docs/models",
     "sourceChecked": "2026-10-08",
     "liveTested": false,
-    "httpTransportMocked": true
+    "httpTransportMocked": true,
+    "mockClarification": "Injected fetch function returning synthetic Response objects; no Gemini HTTP mock server",
+    "applicationDisabledOn": "2026-10-22",
+    "currentReview": "reliability-review-2026-10-22.md"
   },
   "actualUsers": 0,
   "socialEffectMeasured": false,

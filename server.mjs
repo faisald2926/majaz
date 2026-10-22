@@ -6,7 +6,7 @@ import {randomUUID} from 'node:crypto';
 import {Library,fail} from './src/corpus.mjs';
 import {issue,authorized} from './src/auth.mjs';
 import {addDemo} from './src/demo.mjs';
-import {draft,DEFAULT_MODEL} from './src/gemini.mjs';
+import {draft,AI_DISABLED_REASON} from './src/gemini.mjs';
 const root=path.dirname(fileURLToPath(import.meta.url));
 export function createApp({persist=true,dataDir=path.join(root,'data'),writeFile=writeFileSync}={}){
   const entries=new Map();const rates=new Map();
@@ -53,7 +53,7 @@ export function createApp({persist=true,dataDir=path.join(root,'data'),writeFile
       }else{
         if(['library','export','ai'].includes(action))method('GET');else method('POST');
         if(action==='library')result=lib.parent();else if(action==='export')result=lib.exportParent();
-        else if(action==='ai')result={available:Boolean(process.env.GEMINI_API_KEY),model:process.env.GEMINI_MODEL||DEFAULT_MODEL};
+        else if(action==='ai')result={available:false,reason:AI_DISABLED_REASON};
         else if(action==='documents')result=lib.create(body);else if(action==='edit')result=lib.edit(body.id,body.patch??{});
         else if(action==='approve')result=lib.approve(body.id,body.version);else if(action==='revoke')result=lib.revoke(body.id);
         else if(action==='configure')result=lib.configure(body);else if(action==='import')result=lib.import(body);
