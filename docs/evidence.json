@@ -76,5 +76,7 @@
     "exitCode": 0,
     "artifact": "test-green.txt"
   },
-  "currentBrowser": "coordinator-browser-qa.json"
+  "currentBrowser": "coordinator-browser-qa.json",
+  "providerIntegrationReview": "ai-providers.md",
+  "providerIntegrationAddedOn": "2026-10-23"
 }

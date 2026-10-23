@@ -7,7 +7,7 @@ test('child-facing prototype cannot activate live Gemini through environment var
   process.env.GEMINI_API_KEY='test-placeholder-not-a-real-key';
   let outboundCalls=0;
   globalThis.fetch=async (...args)=>{outboundCalls++;throw new Error('External transport forbidden in this test');};
-  const server=createApp({persist:false});
+  const server=createApp({persist:false,aiOptions:{env:{GEMINI_API_KEY:'test-placeholder-not-a-real-key'}}});
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   t.after(async()=>{globalThis.fetch=oldFetch;if(oldKey===undefined)delete process.env.GEMINI_API_KEY;else process.env.GEMINI_API_KEY=oldKey;await new Promise(r=>server.close(r));});
   const base=`http://127.0.0.1:${server.address().port}`;

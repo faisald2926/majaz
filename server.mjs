@@ -3,13 +3,14 @@ import {readFileSync,writeFileSync,mkdirSync,renameSync,existsSync} from 'node:f
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
+import {loadEnvFile} from 'node:process';
 import {Library,fail} from './src/corpus.mjs';
 import {issue,authorized} from './src/auth.mjs';
 import {addDemo} from './src/demo.mjs';
-import {draft,AI_DISABLED_REASON} from './src/gemini.mjs';
+import {draft,aiStatus} from './src/ai.mjs';
 const root=path.dirname(fileURLToPath(import.meta.url));
-export function createApp({persist=true,dataDir=path.join(root,'data'),writeFile=writeFileSync}={}){
-  const entries=new Map();const rates=new Map();
+export function createApp({persist=true,dataDir=path.join(root,'data'),writeFile=writeFileSync,aiOptions={}}={}){
+  const entries=new Map();const rates=new Map();const aiRates=new Map(),aiBusy=new Set();
   const save=candidates=>{if(!persist)return;mkdirSync(dataDir,{recursive:true});const file=path.join(dataDir,'libraries.json');writeFile(file+'.tmp',JSON.stringify([...candidates].map(([id,e])=>({id,parentHash:e.parentHash,childHash:e.childHash,state:e.lib.snapshot()}))),{mode:0o600});renameSync(file+'.tmp',file);};
   if(persist&&existsSync(path.join(dataDir,'libraries.json'))){
     try{for(const e of JSON.parse(readFileSync(path.join(dataDir,'libraries.json'),'utf8')))entries.set(e.id,{parentHash:e.parentHash,childHash:e.childHash,lib:new Library(e.state)});}
@@ -53,16 +54,25 @@ export function createApp({persist=true,dataDir=path.join(root,'data'),writeFile
       }else{
         if(['library','export','ai'].includes(action))method('GET');else method('POST');
         if(action==='library')result=lib.parent();else if(action==='export')result=lib.exportParent();
-        else if(action==='ai')result={available:false,reason:AI_DISABLED_REASON};
+        else if(action==='ai')result=aiStatus(aiOptions);
         else if(action==='documents')result=lib.create(body);else if(action==='edit')result=lib.edit(body.id,body.patch??{});
         else if(action==='approve')result=lib.approve(body.id,body.version);else if(action==='revoke')result=lib.revoke(body.id);
         else if(action==='configure')result=lib.configure(body);else if(action==='import')result=lib.import(body);
         else if(action==='childlink'){const c=issue();e.childHash=c.hash;result={childToken:c.token};}
         else if(action==='remove'){lib.remove(body.id);result={removed:true};}else if(action==='resolve')result=lib.resolve(body.id);
-        else if(action==='draft')result=await draft({...body,childAge:lib.state.childAge});else fail(404,'المسار غير موجود.');
+        else if(action==='draft'){
+          const now=Date.now(),bucket=aiRates.get(id)??{count:0,until:now+60000};
+          if(now>bucket.until){bucket.count=0;bucket.until=now+60000;}
+          if(aiBusy.has(id)||bucket.count>=5)fail(429,'طلبات المسودات محدودة؛ انتظر قليلًا أو استخدم المحرر اليدوي.');
+          bucket.count++;aiRates.set(id,bucket);aiBusy.add(id);
+          try{result=await draft(body,aiOptions);}finally{aiBusy.delete(id);}
+        }else fail(404,'المسار غير موجود.');
       }
       if(req.method==='POST'&&action!=='draft'){const next=new Map(entries);next.set(id,e);save(next);entries.set(id,e);}send(200,result);
     }catch(error){if(!res.headersSent)send(error.status??500,{error:error.status?error.message:'حدث خطأ في الخادم. لم تكتمل العملية.'});else res.end();}
   });return server;
 }
-if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){const port=Number(process.env.PORT||3173);createApp().listen(port,'127.0.0.1',()=>console.log(`مجاز: http://127.0.0.1:${port}`));}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  const envFile=path.join(root,'.env');if(existsSync(envFile))loadEnvFile(envFile);
+  const port=Number(process.env.PORT||3173);createApp().listen(port,'127.0.0.1',()=>console.log(`مجاز: http://127.0.0.1:${port}`));
+}

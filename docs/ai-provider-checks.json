@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-23T04:47:17.236Z",
+  "sourceTestSuite": {
+    "tests": 30,
+    "pass": 30,
+    "fail": 0
+  },
+  "providerUnitAndHttpCases": 8,
+  "providerBrowserChecks": [
+    "openai: preview does not modify editor, library or child content",
+    "Changing provider invalidates preview and sending consent",
+    "anthropic: preview does not modify editor, library or child content",
+    "Applied AI draft remains pending after save; only explicit parent approval exposes it",
+    "Parent UI exposes no API keys; child has no AI controls; no page errors; 390px fits"
+  ],
+  "liveOpenAIOrAnthropicCall": false,
+  "realProviderKeysSupplied": false,
+  "geminiStillDisabled": true
+}
